@@ -1,131 +1,690 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Studio Pilates Staff Uniform Group Order</title>
-  <meta name="description" content="Studio Pilates staff uniform group order" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Pilates — Staff Uniform Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1B18;
+    --bone:#F3EFE6;
+    --bone-dim:#E9E3D6;
+    --brass:#A9834F;
+    --brass-deep:#8A6B3E;
+    --graphite:#6B675F;
+    --line: rgba(28,27,24,0.16);
+    --error:#B4472A;
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em; }
+  a{color:inherit;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    padding: 28px clamp(20px,5vw,64px) 22px;
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:var(--bone); z-index:20;
+  }
+  .brand-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--graphite);
+    margin:0 0 4px;
+  }
+  .brand-name{
+    font-family:'Fraunces',serif;
+    font-optical-sizing:auto;
+    font-weight:500;
+    font-size: clamp(22px,3vw,30px);
+    margin:0;
+  }
+  .cart-toggle{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    background:var(--ink); color:var(--bone);
+    border:none; border-radius:var(--radius);
+    padding:11px 18px;
+    cursor:pointer;
+    display:flex; align-items:center; gap:10px;
+    letter-spacing:.02em;
+  }
+  .cart-toggle:hover{background:var(--brass-deep);}
+  .cart-count{
+    background:var(--brass); color:var(--ink);
+    border-radius:50%; width:20px;height:20px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:600;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 56px clamp(20px,5vw,64px) 40px;
+    max-width:920px;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size: clamp(30px,4.2vw,46px);
+    line-height:1.08;
+    margin:0 0 16px;
+  }
+  .hero p{
+    font-size:15px; line-height:1.6; color:#3d3b36;
+    max-width:60ch; margin:0;
+  }
+  .hero .tag-line{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.1em; text-transform:uppercase;
+    color:var(--brass-deep); margin-top:20px;
+  }
+  .tag-line .dot{ width:6px;height:6px; border-radius:50%; background:var(--brass); }
+
+  /* ---------- Section labels ---------- */
+  .section-head{
+    padding: 40px clamp(20px,5vw,64px) 8px;
+    display:flex; align-items:baseline; gap:16px;
+    border-top:1px solid var(--line);
+    margin-top: 24px;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif; font-weight:500;
+    font-size:22px; margin:0;
+  }
+  .section-head .count{
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    color:var(--graphite); letter-spacing:.05em;
+  }
+
+  /* ---------- Product grid ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:22px;
+    padding: 20px clamp(20px,5vw,64px) 8px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    position:relative;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+  }
+  .card::before{ /* punch hole, swing-tag motif */
+    content:"";
+    position:absolute; top:14px; left:14px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bone);
+    border:1.5px solid var(--graphite);
+    z-index:2;
+  }
+  .card-sku{
+    position:absolute; top:14px; right:14px; z-index:2;
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    color:var(--graphite); background:rgba(243,239,230,.9);
+    padding:2px 6px; border-radius:2px; letter-spacing:.05em;
+  }
+  .card-image{
+    aspect-ratio: 4/5;
+    background: var(--bone-dim);
+    display:flex; align-items:center; justify-content:center;
+    border-bottom:1px dashed var(--line);
+    overflow:hidden;
+  }
+  .card-image img{ width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .card-image svg{ width:38%; opacity:.55; }
+  .card-body{ padding:16px 16px 18px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card-title{ font-family:'Fraunces',serif; font-size:17px; font-weight:500; margin:0; }
+  .card-price{ font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--brass-deep); }
+
+  .size-row{ display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; }
+  .size-chip{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px;
+    border:1px solid var(--line); background:#fff;
+    padding:6px 0; width:38px; text-align:center;
+    border-radius:2px; cursor:pointer;
+    transition: all .12s ease;
+  }
+  .size-chip:hover{ border-color:var(--brass); }
+  .size-chip.active{ background:var(--ink); color:var(--bone); border-color:var(--ink); }
+
+  .size-guide-toggle{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px;
+    color:var(--graphite); text-decoration:underline;
+    background:none; border:none; cursor:pointer; padding:0;
+    text-align:left; letter-spacing:.02em;
+  }
+  .size-guide{
+    display:none; font-size:11.5px; line-height:1.7;
+    background:var(--bone); border:1px dashed var(--line);
+    padding:8px 10px; border-radius:2px; color:#3d3b36;
+  }
+  .size-guide.open{ display:block; }
+  .size-guide table{ width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:10.5px;}
+  .size-guide td{ padding:2px 4px; border-bottom:1px dashed var(--line); }
+
+  .qty-row{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; gap:10px; }
+  .stepper{ display:flex; align-items:center; border:1px solid var(--line); border-radius:2px; }
+  .stepper button{
+    width:28px; height:30px; border:none; background:#fff; cursor:pointer;
+    font-size:15px; color:var(--ink); font-family:'IBM Plex Mono',monospace;
+  }
+  .stepper button:hover{ background:var(--bone-dim); }
+  .stepper input{
+    width:32px; text-align:center; border:none; border-left:1px solid var(--line); border-right:1px solid var(--line);
+    height:30px; font-family:'IBM Plex Mono',monospace; font-size:13px;
+  }
+  .add-btn{
+    background:var(--ink); color:var(--bone); border:none;
+    padding:9px 14px; font-size:12.5px; font-family:'Inter',sans-serif; font-weight:600;
+    border-radius:2px; cursor:pointer; letter-spacing:.02em;
+  }
+  .add-btn:hover{ background:var(--brass-deep); }
+  .add-btn:disabled{ background:var(--graphite); cursor:not-allowed; opacity:.5; }
+  .add-btn.added{ background:var(--brass); }
+
+  /* ---------- Cart drawer ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(28,27,24,.4);
+    opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:30;
+  }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .drawer{
+    position:fixed; top:0; right:0; height:100%;
+    width:min(420px,100%);
+    background:var(--bone);
+    border-left:1px solid var(--line);
+    transform:translateX(100%);
+    transition:transform .25s ease;
+    z-index:31;
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{ transform:translateX(0); }
+  .drawer-head{
+    padding:22px 22px 16px; border-bottom:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .drawer-head h3{ font-family:'Fraunces',serif; font-weight:500; font-size:19px; margin:0; }
+  .drawer-head .docket-label{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--graphite);
+    letter-spacing:.1em; text-transform:uppercase;
+  }
+  .close-btn{ background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); line-height:1; }
+  .drawer-body{ flex:1; overflow-y:auto; padding:8px 22px; }
+  .drawer-empty{ padding:40px 0; text-align:center; color:var(--graphite); font-size:13.5px; }
+
+  .docket-item{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:14px 0; border-bottom:1px dotted var(--line); gap:10px;
+  }
+  .docket-item .meta{ flex:1; }
+  .docket-item .name{ font-size:13.5px; font-weight:600; }
+  .docket-item .sub{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); margin-top:2px; }
+  .docket-item .price-col{ text-align:right; font-family:'IBM Plex Mono',monospace; font-size:13px; white-space:nowrap; }
+  .remove-link{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--error);
+    background:none; border:none; cursor:pointer; padding:0; margin-top:4px; text-decoration:underline;
+  }
+
+  .drawer-foot{ border-top:1px solid var(--line); padding:18px 22px 22px; }
+  .total-row{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px; }
+  .total-row .label{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite); }
+  .total-row .amount{ font-family:'Fraunces',serif; font-size:24px; font-weight:500; }
+  .checkout-btn{
+    width:100%; background:var(--ink); color:var(--bone); border:none;
+    padding:14px; font-size:14px; font-weight:600; border-radius:2px; cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .checkout-btn:hover{ background:var(--brass-deep); }
+  .checkout-btn:disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- Checkout form (inside drawer, swapped view) ---------- */
+  .checkout-form{ display:none; flex-direction:column; gap:14px; padding-top:6px; }
+  .checkout-form.open{ display:flex; }
+  .field label{ display:block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--graphite); margin-bottom:6px; }
+  .field input{
+    width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:2px;
+    font-family:'Inter',sans-serif; font-size:14px; background:#fff;
+  }
+  .field input:focus{ outline:2px solid var(--brass); outline-offset:1px; }
+  .form-note{ font-size:11.5px; color:var(--graphite); line-height:1.6; background:#fff; border:1px dashed var(--line); padding:10px 12px; border-radius:2px; }
+  .back-link{ background:none; border:none; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); cursor:pointer; text-decoration:underline; padding:0; align-self:flex-start; }
+
+  .confirm-view{ display:none; flex-direction:column; align-items:center; text-align:center; justify-content:center; flex:1; gap:14px; padding:20px; }
+  .confirm-view.open{ display:flex; }
+  .confirm-mark{ width:44px; height:44px; border-radius:50%; border:1.5px solid var(--brass); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:20px; }
+  .confirm-view h4{ font-family:'Fraunces',serif; font-weight:500; font-size:19px; margin:0; }
+  .confirm-view p{ font-size:13px; color:#3d3b36; line-height:1.6; max-width:30ch; margin:0; }
+  .confirm-order-id{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); }
+
+  .error-banner{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--error);
+    background: #fbe9e3; border:1px solid var(--error); border-radius:2px;
+    padding:9px 12px; display:none;
+  }
+  .error-banner.show{ display:block; }
+
+  .spinner{
+    width:14px; height:14px; border:2px solid rgba(243,239,230,.4); border-top-color:var(--bone);
+    border-radius:50%; display:inline-block; animation:spin .7s linear infinite; margin-right:8px; vertical-align:-2px;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  footer{
+    padding: 40px clamp(20px,5vw,64px) 60px;
+    border-top:1px solid var(--line); margin-top:40px;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--graphite);
+  }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand-mark">SP</div>
+
+<header class="site">
+  <div>
+    <p class="brand-eyebrow">Studio Pilates · Internal</p>
+    <h1 class="brand-name">Staff Uniform Order</h1>
+  </div>
+  <button class="cart-toggle" id="cartToggle" aria-label="Open cart">
+    Docket <span class="cart-count" id="cartCount">0</span>
+  </button>
+</header>
+
+<section class="hero">
+  <h1>One bulk order, covered shipping.</h1>
+  <p>Choose your sizes, add items, and submit. Everything on this order is placed together as a single studio shipment — no individual freight charges. Your total owing is calculated automatically and confirmed by email.</p>
+  <div class="tag-line"><span class="dot"></span> Ordering window closes when advised by your studio manager</div>
+</section>
+
+<div class="section-head">
+  <h2>Women's Collection</h2>
+  <span class="count" id="womensCount"></span>
+</div>
+<div class="grid" id="womensGrid"></div>
+
+<div class="section-head">
+  <h2>Men's Collection</h2>
+  <span class="count" id="mensCount"></span>
+</div>
+<div class="grid" id="mensGrid"></div>
+
+<footer>
+  Studio Pilates — Staff Uniform Order · V1 · No online payment collected on this page. Payment is by bank transfer, arranged after order confirmation.
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Order docket">
+  <div class="drawer-head">
     <div>
-      <p class="eyebrow">Staff Uniform</p>
-      <h1>Studio Pilates Group Order</h1>
+      <p class="docket-label">Requisition Docket</p>
+      <h3>Your Order</h3>
     </div>
-    <button class="cart-toggle" id="cartToggle" type="button" aria-label="Open order cart">
-      <span>My Order</span>
-      <strong id="cartCount">0</strong>
-    </button>
-  </header>
+    <button class="close-btn" id="closeDrawer" aria-label="Close">&times;</button>
+  </div>
 
-  <main>
-    <section class="hero">
-      <div>
-        <p class="eyebrow">Bulk order · shipping covered by the studio</p>
-        <h2>Choose your uniform items, sizes and quantities.</h2>
-        <p>
-          We are placing one bulk order with the supplier because shipping is almost the same whether we order one item or many.
-          The studio will cover the shipping cost, so you only pay for the items you order.
-        </p>
+  <div class="drawer-body" id="drawerBody">
+    <div id="cartListWrap"></div>
+
+    <form class="checkout-form" id="checkoutForm">
+      <div class="error-banner" id="formError"></div>
+      <div class="field">
+        <label for="staffName">Full name</label>
+        <input type="text" id="staffName" required autocomplete="name">
       </div>
-      <div class="notice-card">
-        <h3>How it works</h3>
-        <ol>
-          <li>Add items to your group order.</li>
-          <li>Review your order total.</li>
-          <li>Submit your name and email.</li>
-          <li>Payment will be arranged separately.</li>
-        </ol>
+      <div class="field">
+        <label for="staffEmail">Email</label>
+        <input type="email" id="staffEmail" required autocomplete="email">
       </div>
-    </section>
-
-    <section class="toolbar" aria-label="Product filters">
-      <button class="filter active" data-filter="all" type="button">All</button>
-      <button class="filter" data-filter="Women's" type="button">Women's</button>
-      <button class="filter" data-filter="Men's" type="button">Men's</button>
-    </section>
-
-    <section class="products" id="products" aria-label="Uniform products"></section>
-  </main>
-
-  <aside class="cart" id="cart" aria-label="My uniform order">
-    <div class="cart-header">
-      <div>
-        <p class="eyebrow">Review</p>
-        <h2>My Order</h2>
-      </div>
-      <button class="icon-button" id="closeCart" type="button" aria-label="Close cart">×</button>
-    </div>
-
-    <div class="cart-items" id="cartItems">
-      <p class="empty">No items added yet.</p>
-    </div>
-
-    <div class="cart-summary">
-      <div class="summary-row">
-        <span>Items</span>
-        <strong id="cartItemTotal">0</strong>
-      </div>
-      <div class="summary-row total">
-        <span>Total owing</span>
-        <strong>$<span id="cartTotal">0.00</span></strong>
-      </div>
-      <p class="shipping-note">Shipping is covered by the studio as part of the bulk order.</p>
-    </div>
-
-    <form class="checkout" id="checkoutForm">
-      <label>
-        Name
-        <input id="staffName" name="staffName" type="text" autocomplete="name" required />
-      </label>
-      <label>
-        Email
-        <input id="staffEmail" name="staffEmail" type="email" autocomplete="email" required />
-      </label>
-      <label class="checkbox-row">
-        <input id="understood" type="checkbox" required />
-        <span>I understand payment will be arranged separately before/after the bulk order is confirmed.</span>
-      </label>
-      <button class="primary" id="submitButton" type="submit">Submit Uniform Order</button>
-      <p class="form-message" id="formMessage" role="status"></p>
+      <div class="form-note">Payment is by bank transfer. Once your order is confirmed, your studio manager will send you the account details and amount owing.</div>
+      <button type="button" class="back-link" id="backToCart">&larr; Back to docket</button>
     </form>
-  </aside>
 
-  <div class="overlay" id="overlay"></div>
-
-  <div class="modal" id="sizeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
-    <div class="modal-card">
-      <div class="modal-header">
-        <h2 id="modalTitle">Size Guide</h2>
-        <button class="icon-button" id="closeModal" type="button" aria-label="Close size guide">×</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
+    <div class="confirm-view" id="confirmView">
+      <div class="confirm-mark">✓</div>
+      <h4>Order submitted</h4>
+      <p>A confirmation has been sent to your email. Your studio manager will confirm sizing and payment next.</p>
+      <p class="confirm-order-id" id="confirmOrderId"></p>
     </div>
   </div>
 
-  <template id="productTemplate">
-    <article class="product-card">
-      <div class="product-image"></div>
-      <div class="product-body">
-        <p class="category"></p>
-        <h3></h3>
-        <p class="price"></p>
-        <p class="fit-note"></p>
-        <div class="sizes"></div>
-        <label class="qty-label">
-          Quantity
-          <input class="qty" type="number" min="1" value="1" />
-        </label>
-        <div class="product-actions">
-          <button class="secondary size-guide" type="button">Size guide</button>
-          <button class="primary add-to-cart" type="button">Add to Group Order</button>
+  <div class="drawer-foot" id="drawerFoot">
+    <div class="total-row">
+      <span class="label">Amount owing</span>
+      <span class="amount mono" id="cartTotal">$0.00</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" disabled>Checkout</button>
+  </div>
+</aside>
+
+<script>
+/* ===================== CONFIG ===================== */
+// Paste your deployed Google Apps Script Web App URL here after setup (see SETUP_GUIDE.md).
+const APPS_SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
+
+// Real size runs and measurements taken from supplier product/sizing pages.
+const PRODUCTS = [
+  {
+    id:"w-tee", category:"womens", name:"Women's Crew T-Shirt", price:25, sku:"W-TEE",
+    sizes:["XS","S","M","L","XL","2XL","3XL"], img:"images/womens-crew-tshirt.jpg",
+    sizeGuide:{ label:"Wo's Basic Tee", cols:["XS","S","M","L","XL","2XL","3XL"],
+      rows:[["Body Width (cm)",45.5,48,50.5,53,55.5,58,63],["Body Length (cm)",62.5,63.5,64.5,65.5,66.5,67.5,69.5]] }
+  },
+  {
+    id:"w-leggings", category:"womens", name:"Women's Crew Leggings", price:57, sku:"W-LEG",
+    sizes:["XS","S","M","L","XL","2XL"], img:"images/womens-crew-leggings.jpg",
+    sizeGuide:{ label:"Wo's Active Seamless Leggings", cols:["XS","S","M","L","XL","2XL"],
+      rows:[["Half Waist (cm)",29,31.5,34,36.5,39,41.5],["Full Length (cm)",88.5,89.5,90.5,91.5,92.5,93.5]] }
+  },
+  {
+    id:"w-jumper", category:"womens", name:"Women's Crew Jumper", price:45, sku:"W-JUM",
+    sizes:["XS","S","M","L","XL","2XL","3XL"], img:"images/womens-crew-jumper.jpg",
+    sizeGuide:{ label:"Wo's Supply Crew", cols:["XS","S","M","L","XL","2XL","3XL"],
+      rows:[["Body Width (cm)",49,51.5,54,56.5,59,61.5,65],["Body Length (cm)",60,62.5,65.5,68.5,71,73.5,75.5]] }
+  },
+  {
+    id:"w-ls-tee", category:"womens", name:"Women's Long Sleeve Crew Tee", price:35, sku:"W-LST",
+    sizes:["XS","S","M","L","XL","2XL"], img:"images/womens-long-sleeve-tee.jpg",
+    sizeGuide:{ label:"Wo's Maple Active L/S Tee", cols:["XS","S","M","L","XL","2XL"],
+      rows:[["Body Width (cm)",45.5,48,50.5,53,55.5,58],["Body Length (cm)",63.5,64.5,65.5,66.5,67.5,68.5]] }
+  },
+  {
+    id:"m-tee", category:"mens", name:"Men's Crew T-Shirt", price:25, sku:"M-TEE",
+    sizes:["S","M","L","XL","2XL","3XL","4XL","5XL"], img:"images/mens-crew-tshirt.jpg",
+    sizeGuide:{ label:"Classic Tee", cols:["S","M","L","XL","2XL","3XL","4XL","5XL"],
+      rows:[["Body Width (cm)",47,52,56.5,61,64,68,74.5,79],["Body Length (cm)",70,74,77.5,81,84,87,88,89]] }
+  },
+  {
+    id:"m-jumper", category:"mens", name:"Men's Crew Jumper", price:47, sku:"M-JUM",
+    sizes:["XS","S","M","L","XL","2XL","3XL","4XL","5XL"], img:"images/mens-crew-jumper.jpg",
+    sizeGuide:{ label:"Mens Supply Crew", cols:["XS","S","M","L","XL","2XL","3XL","4XL","5XL"],
+      rows:[["Body Width (cm)",49.5,52.2,55.5,58.5,61.5,64.5,67.5,70.5,73.5],["Body Length (cm)",69,72,75,78,81,84,87,89,91]] }
+  },
+  {
+    id:"m-ls-tee", category:"mens", name:"Men's Long Sleeve Crew Tee", price:36.5, sku:"M-LST",
+    sizes:["S","M","L","XL","2XL","3XL","4XL","5XL"], img:"images/mens-long-sleeve-tee.jpg",
+    sizeGuide:{ label:"Mens Classic L/S Tee", cols:["S","M","L","XL","2XL","3XL","4XL","5XL"],
+      rows:[["Body Width (cm)",48.5,52.5,56.5,60.5,64.5,68.5,72.5,76.5],["Body Length (cm)",72,75,78,81,84,87,88,89]] }
+  },
+];
+
+/* ===================== STATE ===================== */
+const cart = {}; // key: `${productId}__${size}` -> {product, size, qty}
+const selectedSize = {}; // productId -> size currently chosen on card
+
+/* ===================== ICON (placeholder garment glyph) ===================== */
+function garmentIcon(category){
+  return `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 8 L10 16 L16 26 L22 22 V56 H42 V22 L48 26 L54 16 L42 8 C42 12 38 15 32 15 C26 15 22 12 22 8Z"
+      stroke="#6B675F" stroke-width="1.5" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+/* ===================== RENDER PRODUCT GRID ===================== */
+function money(n){ return "$" + n.toFixed(2); }
+
+function renderGrid(){
+  const womensGrid = document.getElementById("womensGrid");
+  const mensGrid = document.getElementById("mensGrid");
+  womensGrid.innerHTML = ""; mensGrid.innerHTML = "";
+
+  let wCount = 0, mCount = 0;
+
+  PRODUCTS.forEach(p => {
+    selectedSize[p.id] = selectedSize[p.id] || p.sizes[0];
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-sku mono">${p.sku}</div>
+      <div class="card-image">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"
+             onerror="this.parentElement.innerHTML='${garmentIcon(p.category).replace(/'/g,"\\'")}'">
+      </div>
+      <div class="card-body">
+        <p class="card-title">${p.name}</p>
+        <p class="card-price">${money(p.price)}</p>
+        <div class="size-row" data-product="${p.id}">
+          ${p.sizes.map(s => `<div class="size-chip ${s===selectedSize[p.id]?'active':''}" data-size="${s}">${s}</div>`).join("")}
+        </div>
+        <button class="size-guide-toggle" data-product="${p.id}">Size guide ▾</button>
+        <div class="size-guide" data-product="${p.id}">${renderSizeGuideTable(p)}</div>
+        <div class="qty-row">
+          <div class="stepper" data-product="${p.id}">
+            <button type="button" class="qty-minus">−</button>
+            <input type="text" class="qty-input" value="1" inputmode="numeric">
+            <button type="button" class="qty-plus">+</button>
+          </div>
+          <button class="add-btn" data-product="${p.id}">Add to docket</button>
         </div>
       </div>
-    </article>
-  </template>
+    `;
+    (p.category === "womens" ? womensGrid : mensGrid).appendChild(card);
+    if (p.category === "womens") wCount++; else mCount++;
+  });
 
-  <script src="script.js"></script>
+  document.getElementById("womensCount").textContent = wCount + " items";
+  document.getElementById("mensCount").textContent = mCount + " items";
+
+  attachCardEvents();
+}
+
+function renderSizeGuideTable(p){
+  const g = p.sizeGuide;
+  const header = `<tr><td></td>${g.cols.map(c=>`<td><strong>${c}</strong></td>`).join("")}</tr>`;
+  const rows = g.rows.map(r => {
+    const [label, ...vals] = r;
+    return `<tr><td>${label}</td>${vals.map(v=>`<td>${v}</td>`).join("")}</tr>`;
+  }).join("");
+  return `<p style="margin:0 0 6px;font-weight:600;">${g.label}</p><table>${header}${rows}</table>
+    <p style="margin:6px 0 0;opacity:.7;">Measurements can vary within 2.5cm (supplier tolerance).</p>`;
+}
+
+function attachCardEvents(){
+  document.querySelectorAll(".size-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const row = chip.parentElement;
+      const pid = row.dataset.product;
+      selectedSize[pid] = chip.dataset.size;
+      row.querySelectorAll(".size-chip").forEach(c => c.classList.toggle("active", c === chip));
+    });
+  });
+
+  document.querySelectorAll(".size-guide-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const pid = btn.dataset.product;
+      document.querySelector(`.size-guide[data-product="${pid}"]`).classList.toggle("open");
+    });
+  });
+
+  document.querySelectorAll(".stepper").forEach(stepper => {
+    const input = stepper.querySelector(".qty-input");
+    stepper.querySelector(".qty-minus").addEventListener("click", () => {
+      input.value = Math.max(1, (parseInt(input.value)||1) - 1);
+    });
+    stepper.querySelector(".qty-plus").addEventListener("click", () => {
+      input.value = Math.min(99, (parseInt(input.value)||1) + 1);
+    });
+    input.addEventListener("change", () => {
+      let v = parseInt(input.value) || 1;
+      input.value = Math.min(99, Math.max(1, v));
+    });
+  });
+
+  document.querySelectorAll(".add-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const pid = btn.dataset.product;
+      const product = PRODUCTS.find(p => p.id === pid);
+      const size = selectedSize[pid];
+      const stepper = document.querySelector(`.stepper[data-product="${pid}"]`);
+      const qty = parseInt(stepper.querySelector(".qty-input").value) || 1;
+
+      const key = `${pid}__${size}`;
+      if (cart[key]) cart[key].qty += qty;
+      else cart[key] = { product, size, qty };
+
+      renderCart();
+      btn.textContent = "Added ✓";
+      btn.classList.add("added");
+      setTimeout(() => { btn.textContent = "Add to docket"; btn.classList.remove("added"); }, 1100);
+    });
+  });
+}
+
+/* ===================== CART / DRAWER ===================== */
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+const cartListWrap = document.getElementById("cartListWrap");
+const checkoutForm = document.getElementById("checkoutForm");
+const confirmView = document.getElementById("confirmView");
+const drawerFoot = document.getElementById("drawerFoot");
+const checkoutBtn = document.getElementById("checkoutBtn");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+
+function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); overlay.classList.remove("open"); }
+document.getElementById("cartToggle").addEventListener("click", openDrawer);
+document.getElementById("closeDrawer").addEventListener("click", closeDrawer);
+overlay.addEventListener("click", closeDrawer);
+
+function cartEntries(){ return Object.entries(cart); }
+
+function renderCart(){
+  const entries = cartEntries();
+  const totalQty = entries.reduce((s,[,v]) => s + v.qty, 0);
+  const totalPrice = entries.reduce((s,[,v]) => s + v.qty * v.product.price, 0);
+
+  cartCount.textContent = totalQty;
+  cartTotal.textContent = money(totalPrice);
+  checkoutBtn.disabled = entries.length === 0;
+
+  if (entries.length === 0){
+    cartListWrap.innerHTML = `<div class="drawer-empty">Your docket is empty. Add items from the collections to begin.</div>`;
+    return;
+  }
+
+  cartListWrap.innerHTML = entries.map(([key, item]) => `
+    <div class="docket-item" data-key="${key}">
+      <div class="meta">
+        <div class="name">${item.product.name}</div>
+        <div class="sub">SIZE ${item.size} · QTY ${item.qty} · ${money(item.product.price)} EA</div>
+        <button class="remove-link" data-key="${key}">Remove</button>
+      </div>
+      <div class="price-col">${money(item.qty * item.product.price)}</div>
+    </div>
+  `).join("");
+
+  cartListWrap.querySelectorAll(".remove-link").forEach(btn => {
+    btn.addEventListener("click", () => {
+      delete cart[btn.dataset.key];
+      renderCart();
+    });
+  });
+}
+
+/* ===================== CHECKOUT FLOW ===================== */
+checkoutBtn.addEventListener("click", () => {
+  cartListWrap.style.display = "none";
+  checkoutForm.classList.add("open");
+  checkoutBtn.textContent = "Submit order";
+  checkoutBtn.onclick = submitOrder;
+});
+
+document.getElementById("backToCart").addEventListener("click", () => {
+  checkoutForm.classList.remove("open");
+  cartListWrap.style.display = "block";
+  checkoutBtn.textContent = "Checkout";
+  checkoutBtn.onclick = null;
+  checkoutBtn.addEventListener("click", () => {
+    cartListWrap.style.display = "none";
+    checkoutForm.classList.add("open");
+    checkoutBtn.textContent = "Submit order";
+    checkoutBtn.onclick = submitOrder;
+  }, { once:true });
+});
+
+function showFormError(msg){
+  const el = document.getElementById("formError");
+  el.textContent = msg;
+  el.classList.add("show");
+}
+function hideFormError(){
+  document.getElementById("formError").classList.remove("show");
+}
+
+async function submitOrder(){
+  hideFormError();
+  const name = document.getElementById("staffName").value.trim();
+  const email = document.getElementById("staffEmail").value.trim();
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!name || !emailOk){
+    showFormError("Please enter your full name and a valid email address.");
+    return;
+  }
+  const entries = cartEntries();
+  if (entries.length === 0){
+    showFormError("Your docket is empty.");
+    return;
+  }
+
+  const items = entries.map(([,item]) => ({
+    sku: item.product.sku,
+    product: item.product.name,
+    size: item.size,
+    qty: item.qty,
+    unitPrice: item.product.price,
+    lineTotal: Math.round(item.qty * item.product.price * 100) / 100
+  }));
+  const total = Math.round(items.reduce((s,i)=>s+i.lineTotal,0) * 100) / 100;
+
+  const payload = { name, email, items, total, submittedAt: new Date().toISOString() };
+
+  checkoutBtn.disabled = true;
+  checkoutBtn.innerHTML = `<span class="spinner"></span> Submitting…`;
+
+  try {
+    if (APPS_SCRIPT_URL === "PASTE_YOUR_WEB_APP_URL_HERE"){
+      throw new Error("NOT_CONFIGURED");
+    }
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, // avoids CORS preflight against Apps Script
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || "SUBMIT_FAILED");
+
+    checkoutForm.classList.remove("open");
+    confirmView.classList.add("open");
+    drawerFoot.style.display = "none";
+    document.getElementById("confirmOrderId").textContent = "Order ref: " + data.orderId;
+
+  } catch (err){
+    if (err.message === "NOT_CONFIGURED"){
+      showFormError("This page isn't connected to the Google Sheet yet — see SETUP_GUIDE.md to paste the Apps Script Web App URL.");
+    } else {
+      showFormError("Something went wrong submitting your order. Please try again or let your studio manager know.");
+    }
+    checkoutBtn.disabled = false;
+    checkoutBtn.textContent = "Submit order";
+  }
+}
+
+/* ===================== INIT ===================== */
+renderGrid();
+renderCart();
+</script>
 </body>
 </html>
