@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Studio Pilates Staff Uniform Group Order</title>
+  <meta name="description" content="Studio Pilates staff uniform group order" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-mark">SP</div>
+    <div>
+      <p class="eyebrow">Staff Uniform</p>
+      <h1>Studio Pilates Group Order</h1>
+    </div>
+    <button class="cart-toggle" id="cartToggle" type="button" aria-label="Open order cart">
+      <span>My Order</span>
+      <strong id="cartCount">0</strong>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Bulk order · shipping covered by the studio</p>
+        <h2>Choose your uniform items, sizes and quantities.</h2>
+        <p>
+          We are placing one bulk order with the supplier because shipping is almost the same whether we order one item or many.
+          The studio will cover the shipping cost, so you only pay for the items you order.
+        </p>
+      </div>
+      <div class="notice-card">
+        <h3>How it works</h3>
+        <ol>
+          <li>Add items to your group order.</li>
+          <li>Review your order total.</li>
+          <li>Submit your name and email.</li>
+          <li>Payment will be arranged separately.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Product filters">
+      <button class="filter active" data-filter="all" type="button">All</button>
+      <button class="filter" data-filter="Women's" type="button">Women's</button>
+      <button class="filter" data-filter="Men's" type="button">Men's</button>
+    </section>
+
+    <section class="products" id="products" aria-label="Uniform products"></section>
+  </main>
+
+  <aside class="cart" id="cart" aria-label="My uniform order">
+    <div class="cart-header">
+      <div>
+        <p class="eyebrow">Review</p>
+        <h2>My Order</h2>
+      </div>
+      <button class="icon-button" id="closeCart" type="button" aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <p class="empty">No items added yet.</p>
+    </div>
+
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Items</span>
+        <strong id="cartItemTotal">0</strong>
+      </div>
+      <div class="summary-row total">
+        <span>Total owing</span>
+        <strong>$<span id="cartTotal">0.00</span></strong>
+      </div>
+      <p class="shipping-note">Shipping is covered by the studio as part of the bulk order.</p>
+    </div>
+
+    <form class="checkout" id="checkoutForm">
+      <label>
+        Name
+        <input id="staffName" name="staffName" type="text" autocomplete="name" required />
+      </label>
+      <label>
+        Email
+        <input id="staffEmail" name="staffEmail" type="email" autocomplete="email" required />
+      </label>
+      <label class="checkbox-row">
+        <input id="understood" type="checkbox" required />
+        <span>I understand payment will be arranged separately before/after the bulk order is confirmed.</span>
+      </label>
+      <button class="primary" id="submitButton" type="submit">Submit Uniform Order</button>
+      <p class="form-message" id="formMessage" role="status"></p>
+    </form>
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="modal" id="sizeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modalTitle">Size Guide</h2>
+        <button class="icon-button" id="closeModal" type="button" aria-label="Close size guide">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <template id="productTemplate">
+    <article class="product-card">
+      <div class="product-image"></div>
+      <div class="product-body">
+        <p class="category"></p>
+        <h3></h3>
+        <p class="price"></p>
+        <p class="fit-note"></p>
+        <div class="sizes"></div>
+        <label class="qty-label">
+          Quantity
+          <input class="qty" type="number" min="1" value="1" />
+        </label>
+        <div class="product-actions">
+          <button class="secondary size-guide" type="button">Size guide</button>
+          <button class="primary add-to-cart" type="button">Add to Group Order</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
